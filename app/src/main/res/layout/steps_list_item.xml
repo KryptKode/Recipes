@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/card_view_inner_layout_margin"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/cardview_default_radius"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#9F222222"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/steps_title_text_view"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textAppearance="?android:textAppearanceMedium"
+            tools:text = "Preheat the oven"
+            />
+
+        <TextView
+            android:id="@+id/steps_description_text_view"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="4dp"
+            tools:text = "2. Whisk the graham cracker crumbs, 50 grams (1/4 cup) of sugar, and 1/2 teaspoon of salt together in a medium bowl. Pour the melted butter and 1 teaspoon of vanilla into the dry ingredients and stir together until evenly mixed."
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/white"/>
+
+        <Button
+            android:id="@+id/steps_play_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_state"
+            tools:text = "PLAY VIDEO"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
