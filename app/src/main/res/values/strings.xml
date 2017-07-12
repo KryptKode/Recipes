@@ -2,4 +2,6 @@
     <string name="app_name">Recipe</string>
     <string name="action_settings">Settings</string>
     <string name="main_img_description">Recipe Image</string>
+    <string name="ingredients_num">%1$d INGREDIENTS</string>
+    <string name="steps_num">%1$d STEPS</string>
 </resources>

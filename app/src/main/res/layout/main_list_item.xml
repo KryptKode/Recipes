@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/card_view_inner_layout_margin"
+    app:cardElevation="@dimen/cardview_default_radius">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -14,49 +16,47 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/main_img_description"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/img_brownies_main" />
 
         <TextView
-            android:id="@+id/title_textView"
+            android:id="@+id/main_title_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:gravity="start"
             android:background="@color/frame_layout_child_background"
-            android:textColor="@android:color/white"
-            tools:text="Nutella Pie"
+            android:gravity="start"
             android:padding="@dimen/tv_margin"
-            android:textAppearance="?android:textAppearanceLarge"/>
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white"
+            tools:text="Nutella Pie" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/frame_layout_child_background"
             android:layout_gravity="bottom"
+            android:background="@color/frame_layout_child_background"
+            android:orientation="horizontal"
             android:padding="@dimen/card_view_bottom_view_margin">
 
             <TextView
-                android:id="@+id/steps_textView"
+                android:id="@+id/main_steps_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@android:color/white"
-                tools:text="7 STEPS"
-                />
+                tools:text="7 STEPS" />
 
             <TextView
-                android:id="@+id/ingredients_textView2"
+                android:id="@+id/main_ingredients_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@android:color/white"
-                tools:text="12 INGREDIENTS"
-                />
+                tools:text="12 INGREDIENTS" />
         </LinearLayout>
 
     </FrameLayout>
