@@ -11,6 +11,7 @@ import java.util.Random;
  */
 
 public class Recipes implements Parcelable {
+    int id;
     private String recipeName;
     private Ingredients [] ingredients;
     private Steps [] steps;
@@ -68,6 +69,8 @@ public class Recipes implements Parcelable {
         this.steps = steps;
     }
 
+    public void getStepsSize(){
+    }
 
     @Override
     public int describeContents() {

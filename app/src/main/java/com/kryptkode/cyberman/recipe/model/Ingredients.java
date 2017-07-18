@@ -9,15 +9,15 @@ import android.os.Parcelable;
 
 public class Ingredients implements Parcelable {
 
-    private int quantity;
+    private double quantity;
     private String measure;
     private String ingredient;
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
@@ -37,6 +37,7 @@ public class Ingredients implements Parcelable {
         this.ingredient = ingredient;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -44,7 +45,7 @@ public class Ingredients implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.quantity);
+        dest.writeDouble(this.quantity);
         dest.writeString(this.measure);
         dest.writeString(this.ingredient);
     }
@@ -53,12 +54,12 @@ public class Ingredients implements Parcelable {
     }
 
     protected Ingredients(Parcel in) {
-        this.quantity = in.readInt();
+        this.quantity = in.readDouble();
         this.measure = in.readString();
         this.ingredient = in.readString();
     }
 
-    public static final Parcelable.Creator<Ingredients> CREATOR = new Parcelable.Creator<Ingredients>() {
+    public static final Creator<Ingredients> CREATOR = new Creator<Ingredients>() {
         @Override
         public Ingredients createFromParcel(Parcel source) {
             return new Ingredients(source);

@@ -1,64 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/card_view_inner_layout_margin"
-    app:cardElevation="@dimen/cardview_default_radius">
+    android:layout_height="wrap_content">
 
-    <FrameLayout
+    <ImageView
+        android:id="@+id/main_imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/main_img_description"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/img_brownies_main" />
 
-        <ImageView
-            android:id="@+id/main_imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/main_img_description"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/img_brownies_main" />
+    <TextView
+        android:id="@+id/main_title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity=""
+        android:background="@color/frame_layout_child_background"
+        android:gravity="start"
+        android:padding="@dimen/tv_margin"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@android:color/white"
+        tools:text="Nutella Pie" />
 
-        <TextView
-            android:id="@+id/main_title_textView"
-            android:layout_width="match_parent"
+    <LinearLayout
+        style="?android:buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/frame_layout_child_background"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/main_steps_textView"
+            style="?android:buttonBarButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@color/frame_layout_child_background"
-            android:gravity="start"
-            android:padding="@dimen/tv_margin"
-            android:textAppearance="?android:textAppearanceLarge"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="center"
             android:textColor="@android:color/white"
-            tools:text="Nutella Pie" />
+            tools:text="7 STEPS" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/main_ingredients_textView"
+            style="?android:buttonBarButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/frame_layout_child_background"
-            android:orientation="horizontal"
-            android:padding="@dimen/card_view_bottom_view_margin">
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            tools:text="12 INGREDIENTS" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/main_steps_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                tools:text="7 STEPS" />
-
-            <TextView
-                android:id="@+id/main_ingredients_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                tools:text="12 INGREDIENTS" />
-        </LinearLayout>
-
-    </FrameLayout>
-
-</android.support.v7.widget.CardView>
+</FrameLayout>

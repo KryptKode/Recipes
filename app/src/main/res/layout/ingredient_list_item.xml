@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#9F222222"
     android:layout_height="wrap_content"
-    android:layout_margin = "@dimen/tv_margin"
+    android:layout_margin="@dimen/tv_margin"
     android:orientation="vertical">
 
 
@@ -21,25 +22,43 @@
     <TextView
         android:id="@+id/ingredient_textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="top"
         android:layout_marginLeft="@dimen/tv_margin"
         android:layout_marginStart="@dimen/tv_margin"
         android:textAppearance="?android:textAppearanceMedium"
         tools:text="Mascapone Cheese(room temperature)" />
 
-    <TextView
-        android:id="@+id/quantity_textView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:layout_marginLeft="@dimen/tv_margin"
-        android:layout_marginStart="@dimen/tv_margin"
-        android:layout_margin="@dimen/tv_margin_icon"
-        android:drawableLeft="@drawable/ic_measuring_cup_black"
-        android:drawableStart="@drawable/ic_measuring_cup_black"
-        android:textAppearance="?android:textAppearanceMedium"
-        tools:text="2 CUPS" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/quantity_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/tv_margin"
+            android:layout_marginStart="@dimen/tv_margin"
+            android:layout_margin="@dimen/tv_margin_icon"
+            android:contentDescription="@string/quantity_image_view_description"
+            app:srcCompat = "@drawable/ic_measuring_cup_black"/>
+
+        <TextView
+            android:id="@+id/quantity_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/quantity_image_view"
+            android:layout_toRightOf="@+id/quantity_image_view"
+            android:gravity="start"
+            android:layout_marginLeft="@dimen/tv_margin"
+            android:layout_marginStart="@dimen/tv_margin"
+            android:layout_margin="@dimen/tv_margin_icon"
+            android:textAppearance="?android:textAppearanceMedium"
+            tools:text="2 CUPS" />
+
+    </RelativeLayout>
+
+
 
 
 </LinearLayout>

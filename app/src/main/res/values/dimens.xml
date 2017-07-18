@@ -2,6 +2,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="card_view_bottom_view_margin">16dp</dimen>
     <dimen name="card_view_inner_layout_margin">16dp</dimen>
-    <dimen name="tv_margin">8dp</dimen>
+    <dimen name="tv_margin">10dp</dimen>
     <dimen name="tv_margin_icon">4dp</dimen>
+    <dimen name="main_list_root_margin">4dp</dimen>
 </resources>

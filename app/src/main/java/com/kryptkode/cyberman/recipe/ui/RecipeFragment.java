@@ -18,12 +18,12 @@ import java.util.ArrayList;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class RecipeFragment extends Fragment {
+public class RecipeFragment extends Fragment implements RecipeAdapter.RecipeAdapterCallbacks{
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private RecipeAdapter recipeAdapter;
-    private ArrayList<Recipes> recipesArrayList;
+    private Recipes [] recipesArray;
 
     public RecipeFragment() {
     }
@@ -33,12 +33,31 @@ public class RecipeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.main_recycler_view);
-        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recipesArrayList = Recipes.generateDummyRecipes(5);
-        recipeAdapter = new RecipeAdapter(getContext(), recipesArrayList);
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        recipeAdapter = new RecipeAdapter(getContext(), recipesArray);
 
         recyclerView.setAdapter(recipeAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
         return view;
+    }
+
+    public void setRecipesArray(Recipes[] recipesArray) {
+        this.recipesArray = recipesArray;
+    }
+
+
+    @Override
+    public void onRecipeItemClicked(int position) {
+
+    }
+
+    @Override
+    public void onStepsButtonClicked(int position) {
+
+    }
+
+    @Override
+    public void onIngredientsButtonClicked(int position) {
+
     }
 }

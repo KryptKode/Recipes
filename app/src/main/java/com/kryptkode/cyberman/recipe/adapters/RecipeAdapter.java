@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,12 +20,19 @@ import java.util.ArrayList;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>{
 
-    private ArrayList<Recipes> recipesArrayList;
+    private Recipes [] recipesArray;
     private Context context;
     private LayoutInflater layoutInflater;
+    private RecipeAdapterCallbacks recipeAdapterCallbacks;
 
-    public RecipeAdapter(Context context, ArrayList<Recipes> recipesArrayList) {
-        this.recipesArrayList = recipesArrayList;
+    public  interface RecipeAdapterCallbacks{
+        void onRecipeItemClicked(int position);
+        void onStepsButtonClicked(int position);
+        void onIngredientsButtonClicked(int position);
+    }
+
+    public RecipeAdapter(Context context, Recipes [] recipesArray) {
+        this.recipesArray = recipesArray;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
     }
@@ -37,12 +45,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     @Override
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
-        Recipes recipe = recipesArrayList.get(position);
+        Recipes recipe = recipesArray[0];
         ImageView cover = holder.coverImageView;
         TextView titleTextView = holder.titleTextView;
-        TextView stepsTextView = holder.stepsTextView;
-        TextView ingredientsTextView = holder.ingredientsTextView;
+        Button stepsButton = holder.stepsButton;
+        Button ingredientsButton = holder.ingredientsButton;
+
         int imageResourceId = R.drawable.ic_app_icon;
+
         switch (recipe.getRecipeName()){
             case "Nutella":
                 imageResourceId = R.drawable.img_nutella_home;
@@ -61,30 +71,57 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         }
         cover.setImageResource(imageResourceId);
         titleTextView.setText(recipe.getRecipeName());
-        ingredientsTextView.setText(context.getString(R.string.ingredients_num));
-        stepsTextView.setText(context.getString(R.string.steps_num));
+        ingredientsButton.setText(context.getString(R.string.ingredients_num, recipe.getIngredients().length));
+        stepsButton.setText(context.getString(R.string.steps_num, recipe.getSteps().length));
 
     }
 
     @Override
     public int getItemCount() {
-        return recipesArrayList.size();
+        return recipesArray.length;
     }
 
-    class RecipeViewHolder extends RecyclerView.ViewHolder{
+    public void setRecipeAdapterCallbacks(RecipeAdapterCallbacks recipeAdapterCallbacks) {
+        this.recipeAdapterCallbacks = recipeAdapterCallbacks;
+    }
+
+    class RecipeViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
 
         ImageView coverImageView;
         TextView titleTextView;
-        TextView stepsTextView;
-        TextView ingredientsTextView;
+        Button stepsButton;
+        Button ingredientsButton;
 
         RecipeViewHolder(View itemView) {
             super(itemView);
 
             coverImageView = (ImageView) itemView.findViewById(R.id.main_imageView);
             titleTextView = (TextView) itemView.findViewById(R.id.main_title_textView);
-            stepsTextView = (TextView) itemView.findViewById(R.id.main_steps_textView);
-            ingredientsTextView = (TextView) itemView.findViewById(R.id.main_ingredients_textView);
+            stepsButton = (Button) itemView.findViewById(R.id.main_steps_textView);
+            ingredientsButton = (Button) itemView.findViewById(R.id.main_ingredients_textView);
+
+            //set the listeners
+            itemView.setOnClickListener(this);
+            stepsButton.setOnClickListener(this);
+            ingredientsButton.setOnClickListener(this);
+
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            int id = v.getId();
+            switch (id){
+                case R.id.main_steps_textView:
+                    recipeAdapterCallbacks.onStepsButtonClicked(getAdapterPosition());
+                    break;
+                case R.id.main_ingredients_textView:
+                    recipeAdapterCallbacks.onIngredientsButtonClicked(getAdapterPosition());
+                    break;
+                default:
+                    recipeAdapterCallbacks.onRecipeItemClicked(getAdapterPosition());
+                    break;
+            }
         }
     }
 }
