@@ -1,9 +1,11 @@
 package com.kryptkode.cyberman.recipe.adapters;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.kryptkode.cyberman.recipe.ui.ContentFragment;
 import com.kryptkode.cyberman.recipe.ui.IngredientsFragment;
 import com.kryptkode.cyberman.recipe.ui.StepsFragment;
 
@@ -13,7 +15,10 @@ import com.kryptkode.cyberman.recipe.ui.StepsFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
 
-    int tabCount;
+    private int tabCount;
+    private Bundle stepsBundle;
+    private Bundle ingredientsBundle;
+    private StepsFragment.StepFragmentCallbacks callback;
 
     public PagerAdapter(FragmentManager fm, int numberOfTabs) {
         super(fm);
@@ -25,9 +30,14 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case 0:
-                return new StepsFragment();
+               StepsFragment stepFragment = new StepsFragment();
+                stepFragment.setArguments(stepsBundle);
+                stepFragment.setStepFragmentCallbacks(callback);
+                return stepFragment;
             case 1:
-                return new IngredientsFragment();
+                IngredientsFragment ingredientsFragment = new IngredientsFragment();
+                ingredientsFragment.setArguments(ingredientsBundle);
+                return ingredientsFragment;
             default:
                 return null;
         }
@@ -38,5 +48,17 @@ public class PagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return tabCount;
+    }
+
+    public void setStepsBundle(Bundle bundle) {
+        this.stepsBundle = bundle;
+    }
+
+    public void setIngredientsBundle(Bundle ingredientsBundle) {
+        this.ingredientsBundle = ingredientsBundle;
+    }
+
+    public void setCallback(StepsFragment.StepFragmentCallbacks callback) {
+        this.callback = callback;
     }
 }

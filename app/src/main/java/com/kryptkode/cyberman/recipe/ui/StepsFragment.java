@@ -20,19 +20,32 @@ import java.util.ArrayList;
  * Created by Cyberman on 7/12/2017.
  */
 
-public class StepsFragment extends Fragment {
+public class StepsFragment extends Fragment implements StepsAdapter.StepsAdapterCallbacks{
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private StepsAdapter stepsAdapter;
     private Steps [] steps;
+    private StepFragmentCallbacks stepFragmentCallbacks;
+
+    public interface StepFragmentCallbacks{
+        void onPlayVideoButtonClicked();
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        steps = (Steps[]) getArguments().getParcelableArray(Steps.KEY);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_steps, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.main_recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.steps_recycler_view);
         linearLayoutManager = new LinearLayoutManager(getContext());
         stepsAdapter = new StepsAdapter(getContext(), steps);
+        stepsAdapter.setStepsAdapterCallbacks(this);
         recyclerView.setAdapter(stepsAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
         return view;
@@ -40,5 +53,14 @@ public class StepsFragment extends Fragment {
 
     public void setSteps(Steps[] steps) {
         this.steps = steps;
+    }
+
+    public void setStepFragmentCallbacks(StepFragmentCallbacks stepFragmentCallbacks) {
+        this.stepFragmentCallbacks = stepFragmentCallbacks;
+    }
+
+    @Override
+    public void onPlayVideoButtonClicked() {
+        stepFragmentCallbacks.onPlayVideoButtonClicked();
     }
 }

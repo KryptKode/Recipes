@@ -1,62 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/main_imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/main_img_description"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/img_brownies_main" />
-
-    <TextView
-        android:id="@+id/main_title_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity=""
-        android:background="@color/frame_layout_child_background"
-        android:gravity="start"
-        android:padding="@dimen/tv_margin"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="@android:color/white"
-        tools:text="Nutella Pie" />
-
-    <LinearLayout
-        style="?android:buttonBarStyle"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/frame_layout_child_background"
-        android:orientation="horizontal">
+        app:layout_goneMarginBottom="@dimen/card_view_bottom_view_margin">
 
-        <Button
-            android:id="@+id/main_steps_textView"
-            style="?android:buttonBarButtonStyle"
-            android:layout_width="0dp"
+        <ImageView
+            android:id="@+id/main_imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/main_img_description"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/img_brownies_main" />
+
+        <TextView
+            android:id="@+id/main_title_textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:gravity="center"
+            android:layout_gravity=""
+            android:background="@color/frame_layout_child_background"
+            android:gravity="start"
+            android:padding="@dimen/tv_margin"
+            android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@android:color/white"
-            tools:text="7 STEPS" />
+            tools:text="Nutella Pie" />
 
-        <Button
-            android:id="@+id/main_ingredients_textView"
-            style="?android:buttonBarButtonStyle"
-            android:layout_width="0dp"
+        <LinearLayout
+            style="?android:buttonBarStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            tools:text="12 INGREDIENTS" />
-    </LinearLayout>
+            android:layout_gravity="bottom"
+            android:background="@color/frame_layout_child_background"
+            android:orientation="horizontal">
 
-</FrameLayout>
+            <Button
+                android:id="@+id/main_steps_textView"
+                style="?android:buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/background_state"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                tools:text="7 STEPS" />
+
+            <Button
+                android:id="@+id/main_ingredients_textView"
+                style="?android:buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/background_state"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                tools:text="12 INGREDIENTS" />
+        </LinearLayout>
+
+    </FrameLayout>
+

@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class Recipes implements Parcelable {
     int id;
-    private String recipeName;
+    private String name;
     private Ingredients [] ingredients;
     private Steps [] steps;
 
@@ -46,11 +46,11 @@ public class Recipes implements Parcelable {
     }
 
     public String getRecipeName() {
-        return recipeName;
+        return name;
     }
 
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
+    public void setRecipeName(String name) {
+        this.name = name;
     }
 
     public Ingredients[] getIngredients() {
@@ -79,7 +79,7 @@ public class Recipes implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.recipeName);
+        dest.writeString(this.name);
         dest.writeTypedArray(this.ingredients, flags);
         dest.writeTypedArray(this.steps, flags);
     }
@@ -88,7 +88,7 @@ public class Recipes implements Parcelable {
     }
 
     protected Recipes(Parcel in) {
-        this.recipeName = in.readString();
+        this.name = in.readString();
         this.ingredients = in.createTypedArray(Ingredients.CREATOR);
         this.steps = in.createTypedArray(Steps.CREATOR);
     }

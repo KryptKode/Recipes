@@ -2,6 +2,7 @@ package com.kryptkode.cyberman.recipe.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.kryptkode.cyberman.recipe.R;
 import com.kryptkode.cyberman.recipe.model.Recipes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Cyberman on 7/12/2017.
@@ -33,6 +35,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     public RecipeAdapter(Context context, Recipes [] recipesArray) {
         this.recipesArray = recipesArray;
+        Log.v("RecipeAdapter", "RecipeAdapter: " + this.recipesArray.length);
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
     }
@@ -45,7 +48,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     @Override
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
-        Recipes recipe = recipesArray[0];
+        Recipes recipe = recipesArray[position];
+        Log.v("RecipeAdapter", "onBindView " + Arrays.toString(recipesArray));
+        Log.v("RecipeAdapter", "onBindView " + recipe);
+        Log.v("RecipeAdapter", "onBindView " + recipe.getRecipeName());
         ImageView cover = holder.coverImageView;
         TextView titleTextView = holder.titleTextView;
         Button stepsButton = holder.stepsButton;
@@ -54,14 +60,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         int imageResourceId = R.drawable.ic_app_icon;
 
         switch (recipe.getRecipeName()){
-            case "Nutella":
+            case "Nutella Pie":
                 imageResourceId = R.drawable.img_nutella_home;
                 break;
             case "Brownies":
                 imageResourceId = R.drawable.img_brownies_main;
                 break;
 
-            case "Cheese Cake":
+            case "Cheesecake":
                 imageResourceId = R.drawable.img_cheesecake_main;
                 break;
 
@@ -72,7 +78,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         cover.setImageResource(imageResourceId);
         titleTextView.setText(recipe.getRecipeName());
         ingredientsButton.setText(context.getString(R.string.ingredients_num, recipe.getIngredients().length));
-        stepsButton.setText(context.getString(R.string.steps_num, recipe.getSteps().length));
+        stepsButton.setText(context.getString(R.string.steps_num, recipe.getSteps().length - 1));
 
     }
 

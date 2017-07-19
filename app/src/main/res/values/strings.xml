@@ -11,4 +11,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="steps">STEPS</string>
     <string name="ingredients">INGREDIENTS</string>
+    <string name="play_video">PLAY VIDEO</string>
+    <string name="recipes">Recipes</string>
 </resources>

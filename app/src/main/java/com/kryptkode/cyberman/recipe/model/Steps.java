@@ -8,10 +8,11 @@ import android.os.Parcelable;
  */
 
 public class Steps implements Parcelable {
+    public static final String KEY = "step_key";
     private int id;
     private String shortDescription;
     private String description;
-    private String videoUrl;
+    private String videoURL;
     private String thumbnailUrl;
 
     public int getId() {
@@ -39,11 +40,11 @@ public class Steps implements Parcelable {
     }
 
     public String getVideoUrl() {
-        return videoUrl;
+        return videoURL;
     }
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
+    public void setVideoUrl(String videoURL) {
+        this.videoURL = videoURL;
     }
 
     public String getThumbnailUrl() {
@@ -65,7 +66,7 @@ public class Steps implements Parcelable {
         dest.writeInt(this.id);
         dest.writeString(this.shortDescription);
         dest.writeString(this.description);
-        dest.writeString(this.videoUrl);
+        dest.writeString(this.videoURL);
         dest.writeString(this.thumbnailUrl);
     }
 
@@ -76,7 +77,7 @@ public class Steps implements Parcelable {
         this.id = in.readInt();
         this.shortDescription = in.readString();
         this.description = in.readString();
-        this.videoUrl = in.readString();
+        this.videoURL = in.readString();
         this.thumbnailUrl = in.readString();
     }
 

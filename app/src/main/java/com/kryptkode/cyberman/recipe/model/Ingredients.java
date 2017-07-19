@@ -9,6 +9,7 @@ import android.os.Parcelable;
 
 public class Ingredients implements Parcelable {
 
+    public static final String KEY = "ingredient_key";
     private double quantity;
     private String measure;
     private String ingredient;

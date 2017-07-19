@@ -24,6 +24,14 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.RecipeAdap
     private LinearLayoutManager linearLayoutManager;
     private RecipeAdapter recipeAdapter;
     private Recipes [] recipesArray;
+    private RecipeFragmentCallbacks recipeFragmentCallbacks;
+
+    public interface RecipeFragmentCallbacks{
+        void onRecipeItemClicked(int position);
+        void onStepsButtonClicked(int position);
+        void onIngredientsButtonClicked(int position);
+        void onSetRecipeActionBarTitle();
+    }
 
     public RecipeFragment() {
     }
@@ -35,29 +43,38 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.RecipeAdap
         recyclerView = (RecyclerView) view.findViewById(R.id.main_recycler_view);
         linearLayoutManager = new LinearLayoutManager(getContext());
         recipeAdapter = new RecipeAdapter(getContext(), recipesArray);
-
+        recipeAdapter.setRecipeAdapterCallbacks(this);
         recyclerView.setAdapter(recipeAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        recipeFragmentCallbacks.onSetRecipeActionBarTitle();
     }
 
     public void setRecipesArray(Recipes[] recipesArray) {
         this.recipesArray = recipesArray;
     }
 
+    public void setRecipeFragmentCallbacks(RecipeFragmentCallbacks recipeFragmentCallbacks) {
+        this.recipeFragmentCallbacks = recipeFragmentCallbacks;
+    }
 
     @Override
     public void onRecipeItemClicked(int position) {
-
+        recipeFragmentCallbacks.onRecipeItemClicked(position);
     }
 
     @Override
     public void onStepsButtonClicked(int position) {
-
+        recipeFragmentCallbacks.onStepsButtonClicked(position);
     }
 
     @Override
     public void onIngredientsButtonClicked(int position) {
-
+        recipeFragmentCallbacks.onIngredientsButtonClicked(position);
     }
 }

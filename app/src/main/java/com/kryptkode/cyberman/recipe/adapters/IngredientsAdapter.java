@@ -12,6 +12,7 @@ import com.kryptkode.cyberman.recipe.R;
 import com.kryptkode.cyberman.recipe.model.Ingredients;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by Cyberman on 7/12/2017.
@@ -40,7 +41,11 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         ImageView quantityImageView = holder.quantityImageView;
 
         numberTextView.setText(String.valueOf(position + 1));
-        ingredientTextView.setText(ingredient.getIngredient());
+        String ingredientString = ingredient.getIngredient();
+        String firstLetter = ingredientString.substring(0, 1).toUpperCase(Locale.US);
+        ingredientString = firstLetter + ingredientString.substring(1, ingredientString.length());
+
+        ingredientTextView.setText(ingredientString);
         String measure = ingredient.getMeasure();
         String quantityMeasure = String.valueOf(ingredient.getQuantity()) + ingredient.getMeasure();
         quantityTextView.setText(quantityMeasure);

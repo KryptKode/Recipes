@@ -44,6 +44,8 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
         Steps step = steps [position];
         TextView titleTextView = holder.titleTextView;
         TextView descriptionTextView = holder.descriptionTextView;
+        View view = holder.view;
+
         Button playVideoButton = holder.playVideoButton;
         String videoUrl = step.getVideoUrl();
 
@@ -51,14 +53,14 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
         descriptionTextView.setText(step.getDescription());
 
         if (videoUrl.equals("")){
-            playVideoButton.setText(context.getString(R.string.no_video));
-            playVideoButton.setEnabled(false);
+            playVideoButton.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
         }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return steps.length;
     }
 
     public interface StepsAdapterCallbacks{
@@ -70,13 +72,15 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
         TextView titleTextView;
         TextView descriptionTextView;
         Button playVideoButton;
+        View view;
 
-        public StepsViewHolder(View itemView) {
+        StepsViewHolder(View itemView) {
             super(itemView);
 
             titleTextView = (TextView) itemView.findViewById(R.id.steps_title_text_view);
             descriptionTextView = (TextView) itemView.findViewById(R.id.steps_description_text_view);
             playVideoButton = (Button) itemView.findViewById(R.id.steps_play_video);
+            view = itemView.findViewById(R.id.steps_divider);
 
             //set a click listener on the button
             playVideoButton.setOnClickListener(this);
