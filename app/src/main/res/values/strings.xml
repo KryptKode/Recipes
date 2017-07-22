@@ -1,16 +1,19 @@
 <resources>
-    <string name="app_name">Recipe</string>
+    <string name="app_name">My Recipes</string>
     <string name="action_settings">Settings</string>
     <string name="main_img_description">Recipe Image</string>
     <string name="ingredients_num">%1$d INGREDIENTS</string>
     <string name="steps_num">%1$d STEPS</string>
     <string name="quantity_image_view_description">Image to represent the measure of the ingrident</string>
     <string name="no_video">NO VIDEO</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="steps">STEPS</string>
     <string name="ingredients">INGREDIENTS</string>
     <string name="play_video">PLAY VIDEO</string>
     <string name="recipes">Recipes</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="ingredients_widget">Ingredients (%1$d)</string>
+    <string name="text_error_text_view">Unable to load data</string>
+    <string name="text_loading_">Loading...</string>
+    <string name="turn_on_internet">Pleasd turn on your internet connection</string>
 </resources>

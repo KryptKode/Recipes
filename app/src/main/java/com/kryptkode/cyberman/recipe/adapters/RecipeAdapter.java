@@ -33,9 +33,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         void onIngredientsButtonClicked(int position);
     }
 
+    public void setRecipesArray(Recipes[] recipesArray) {
+        this.recipesArray = recipesArray;
+    }
+
     public RecipeAdapter(Context context, Recipes [] recipesArray) {
         this.recipesArray = recipesArray;
-        Log.v("RecipeAdapter", "RecipeAdapter: " + this.recipesArray.length);
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
     }
@@ -84,6 +87,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     @Override
     public int getItemCount() {
+        if (recipesArray == null) {
+            return 0;
+        }
         return recipesArray.length;
     }
 

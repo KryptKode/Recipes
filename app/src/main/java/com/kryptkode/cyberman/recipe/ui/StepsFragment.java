@@ -11,10 +11,7 @@ import android.view.ViewGroup;
 
 import com.kryptkode.cyberman.recipe.R;
 import com.kryptkode.cyberman.recipe.adapters.StepsAdapter;
-import com.kryptkode.cyberman.recipe.model.Recipes;
 import com.kryptkode.cyberman.recipe.model.Steps;
-
-import java.util.ArrayList;
 
 /**
  * Created by Cyberman on 7/12/2017.
@@ -29,7 +26,7 @@ public class StepsFragment extends Fragment implements StepsAdapter.StepsAdapter
     private StepFragmentCallbacks stepFragmentCallbacks;
 
     public interface StepFragmentCallbacks{
-        void onPlayVideoButtonClicked();
+        void onPlayVideoButtonClicked(String videoUrl);
     }
 
 
@@ -60,7 +57,8 @@ public class StepsFragment extends Fragment implements StepsAdapter.StepsAdapter
     }
 
     @Override
-    public void onPlayVideoButtonClicked() {
-        stepFragmentCallbacks.onPlayVideoButtonClicked();
+    public void onPlayVideoButtonClicked(int position) {
+        String videoUrl = steps[position].getVideoUrl();
+        stepFragmentCallbacks.onPlayVideoButtonClicked(videoUrl);
     }
 }

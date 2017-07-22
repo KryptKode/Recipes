@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="widget_ingredients">
+        <item>Bittersweet chocolate (60–70% cacao) 350G</item>
+        <item>Unsalted butter 350G</item>
+        <item>Granulated sugar 350G</item>
+        <item>Light brown sugar 350G</item>
+        <item>Large eggs 350G</item>
+        <item>Vanilla extract 350G</item>
+        <item>All purpose flour 350G</item>
+        <item>semisweet chocolate chips 350G</item>
+        <item>Cocoa powder 350G</item>
+        <item>Cocoa powder 350G</item>
+    </string-array>
+</resources>

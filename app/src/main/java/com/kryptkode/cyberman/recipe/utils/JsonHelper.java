@@ -60,4 +60,10 @@ public class JsonHelper {
         recipes = gson.fromJson(jsonText, Recipes[].class);
         return recipes;
     }
+    public static Recipes [] parseJson(String data){
+        Gson gson = new Gson();
+        Log.i("parseJson", "parseJson: " + data);
+        recipes = gson.fromJson(data, Recipes[].class);
+        return recipes;
+    }
 }

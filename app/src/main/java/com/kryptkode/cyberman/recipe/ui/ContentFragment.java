@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.kryptkode.cyberman.recipe.R;
 import com.kryptkode.cyberman.recipe.RecipeActivity;
 import com.kryptkode.cyberman.recipe.adapters.PagerAdapter;
 import com.kryptkode.cyberman.recipe.model.Ingredients;
+import com.kryptkode.cyberman.recipe.model.Recipes;
 import com.kryptkode.cyberman.recipe.model.Steps;
 
 /**
@@ -23,6 +26,7 @@ public class ContentFragment extends Fragment implements StepsFragment.StepFragm
     public static final String ARG = "bundle";
     private Steps[] steps;
     private Ingredients[] ingredients;
+    private String recipeName;
     private ViewPager viewPager;
     private int whichTab;
     private boolean toSelectTab;
@@ -34,8 +38,7 @@ public class ContentFragment extends Fragment implements StepsFragment.StepFragm
     }
 
     public interface ContentFragmentCallbacks{
-        void onPlayVideoButtonClicked();
-        void onSetContentActionBarTitle();
+        void onPlayVideoButtonClicked(String videoUrl);
     }
 
     @Override
@@ -44,6 +47,7 @@ public class ContentFragment extends Fragment implements StepsFragment.StepFragm
         Bundle bundle = getArguments();
         ingredients = (Ingredients[]) bundle.getParcelableArray(Ingredients.KEY);
         steps = (Steps[]) bundle.getParcelableArray(Steps.KEY);
+        recipeName = bundle.getString(Recipes.KEY);
 
         if (bundle.containsKey(RecipeActivity.DETERMINANT)) {
             whichTab = bundle.getInt(RecipeActivity.DETERMINANT);
@@ -55,13 +59,18 @@ public class ContentFragment extends Fragment implements StepsFragment.StepFragm
     @Override
     public void onResume() {
         super.onResume();
-        callback.onSetContentActionBarTitle();
+//        callback.onSetContentActionBarTitle();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_content, container, false);
+
+        AppCompatActivity appCompatActivity = (AppCompatActivity) getContext();
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        toolbar.setTitle(recipeName);
+        appCompatActivity.setSupportActionBar(toolbar);
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.content_tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.steps)));
@@ -111,8 +120,8 @@ public class ContentFragment extends Fragment implements StepsFragment.StepFragm
     }
 
     @Override
-    public void onPlayVideoButtonClicked() {
-        callback.onPlayVideoButtonClicked();
+    public void onPlayVideoButtonClicked(String videoUrl) {
+        callback.onPlayVideoButtonClicked(videoUrl);
     }
 
     public void setCallback(ContentFragmentCallbacks callback) {

@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.kryptkode.cyberman.recipe.R;
 import com.kryptkode.cyberman.recipe.model.Steps;
 
-import java.util.Objects;
-
 /**
  * Created by Cyberman on 7/12/2017.
  */
@@ -64,7 +62,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
     }
 
     public interface StepsAdapterCallbacks{
-        void onPlayVideoButtonClicked();
+        void onPlayVideoButtonClicked(int position);
     }
 
 
@@ -88,7 +86,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
 
         @Override
         public void onClick(View v) {
-            stepsAdapterCallbacks.onPlayVideoButtonClicked();
+            stepsAdapterCallbacks.onPlayVideoButtonClicked(getAdapterPosition());
         }
     }
 }
