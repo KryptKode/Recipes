@@ -12,8 +12,13 @@
     <string name="recipes">Recipes</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
-    <string name="ingredients_widget">Ingredients (%1$d)</string>
+    <string name="ingredients_widget">Ingredients </string>
+    <string name="for_ingredients">for %1$s</string>
     <string name="text_error_text_view">Unable to load data</string>
-    <string name="text_loading_">Loading...</string>
-    <string name="turn_on_internet">Pleasd turn on your internet connection</string>
+    <string name="text_loading_">Loading…</string>
+    <string name="turn_on_internet">Please turn ON your internet connection</string>
+    <string name="error">An error occurred</string>
+    <string name="empty_view_text">No Ingredients</string>
+    <string name="shared_prefs_name">Last Viewed Recipe</string>
+    <string name="turn_on_internet_to_play_video">Please turn ON your internet connection… \nInternet Connectivity is required to play video</string>
 </resources>

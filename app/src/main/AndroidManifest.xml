@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".WidgetProvider">
+        <receiver android:name=".widget.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -33,11 +33,19 @@
                 android:resource="@xml/widget_provider_info" />
         </receiver>
 
+        <service android:name=".widget.ListWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <provider
+            android:authorities="com.kryptkode.cyberman.recipe.data"
+            android:name=".data.RecipeProvider"
+            android:exported="false"/>
+
         <service
             android:name=".RecipeService"
             android:exported="false" />
 
-        <activity android:name=".RecipeVideoPlayerActivity"></activity>
+        <activity android:name=".RecipeVideoPlayerActivity" />
     </application>
 
 </manifest>

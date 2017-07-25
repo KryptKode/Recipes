@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#F8111111</color>
     <color name="colorAccent">#ffcf40</color>
     <color name="frame_layout_child_background">#A3000000</color>
+    <color name="widget_item_background">#A3232323</color>
+    <color name="parent_background">#444444</color>
 </resources>

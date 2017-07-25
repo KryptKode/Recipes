@@ -2,12 +2,15 @@ package com.kryptkode.cyberman.recipe;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -33,6 +36,9 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.kryptkode.cyberman.recipe.utils.NetworkHelper;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 /**
  * Created by Cyberman on 7/21/2017.
@@ -42,8 +48,7 @@ import com.google.android.exoplayer2.util.Util;
      */
     public class RecipeVideoPlayerActivity extends AppCompatActivity {
         public static final String VIDEO_URL = "video";
-
-        private static final DefaultBandwidthMeter BANDWIDTH_METER = new DefaultBandwidthMeter();
+        public static final String THUMBNAIL = "thumbnail" ;
 
         public static final String PLAY_WHEN_READY = "play_when_ready";
         public static final String CURRENT_WINDOW = "current_window";
@@ -57,6 +62,7 @@ import com.google.android.exoplayer2.util.Util;
         private int currentWindow;
         private long playbackPosition;
         private String videoUrl;
+        private String thumbnail;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +74,9 @@ import com.google.android.exoplayer2.util.Util;
             progressBar = (ProgressBar) findViewById(R.id.player_progress_bar);
             if (getIntent().hasExtra(VIDEO_URL)) {
                 videoUrl = getIntent().getStringExtra(VIDEO_URL);
+            }
+            if (getIntent().hasExtra(THUMBNAIL)){
+                thumbnail = getIntent().getStringExtra(THUMBNAIL);
             }
 
             if (savedInstanceState != null) {
@@ -85,14 +94,34 @@ import com.google.android.exoplayer2.util.Util;
 
 
         private void initializePlayer() {
-           /* // a factory to create an AdaptiveVideoTrackSelection
-            TrackSelection.Factory adaptiveTrackSelectionFactory =
-                    new AdaptiveTrackSelection.Factory(BANDWIDTH_METER);*/
-            // using a DefaultTrackSelector with an adaptive video selection factory
+
+            // using a DefaultTrackSelector
             player = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(this),
                     new DefaultTrackSelector(), new DefaultLoadControl());
 
             playerView.setPlayer(player);
+
+            //if there is a thumbnail, load it as the player's artwork
+            if (!thumbnail.isEmpty()) {
+                Target mTarget = new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        playerView.setDefaultArtwork(bitmap);
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                };
+
+                Picasso.with(this).load(thumbnail).into(mTarget);
+            }
             player.setPlayWhenReady(playWhenReady);
             player.addListener(exoPlayerListenter);
 
@@ -105,10 +134,6 @@ import com.google.android.exoplayer2.util.Util;
         }
 
         private MediaSource buildMediaSource(Uri uri) {
-            /*DataSource.Factory dataSourceFactory = new DefaultHttpDataSourceFactory("ua", BANDWIDTH_METER);
-            DashChunkSource.Factory dashChunkSourceFactory = new DefaultDashChunkSource.Factory(
-                    dataSourceFactory);
-            return new DashMediaSource(uri, dataSourceFactory, dashChunkSourceFactory, null, null);*/
             return new ExtractorMediaSource(uri,
                     new DefaultHttpDataSourceFactory("ua"),
                     new DefaultExtractorsFactory(), null ,null);
@@ -198,7 +223,11 @@ import com.google.android.exoplayer2.util.Util;
                 switch (playbackState){
                     case ExoPlayer.STATE_IDLE:
                         showProgressBar();
+                        checkForNetworkConnectivity();
                         Log.i("player", "onPlayerStateChanged: IDLE " + playWhenReady);
+                        break;
+                    case ExoPlayer.STATE_BUFFERING:
+                        checkForNetworkConnectivity();
                         break;
                     case ExoPlayer.STATE_READY:
                         hideProgressBar();
@@ -221,6 +250,12 @@ import com.google.android.exoplayer2.util.Util;
             @Override
             public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
 
+            }
+        }
+
+        private void checkForNetworkConnectivity() {
+            if(!NetworkHelper.isOnline(this)){
+                Toast.makeText(this, getString(R.string.turn_on_internet), Toast.LENGTH_SHORT).show();
             }
         }
 

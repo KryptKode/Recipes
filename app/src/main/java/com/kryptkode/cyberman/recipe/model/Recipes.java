@@ -12,46 +12,45 @@ import java.util.Random;
 
 public class Recipes implements Parcelable {
     public static final String KEY = "name_of_recipe";
+    public static final String ID = "id_of_recipe";
     int id;
     private String name;
+    private int servings;
+    private String image;
     private Ingredients [] ingredients;
     private Steps [] steps;
 
-    public static ArrayList<Recipes> generateDummyRecipes(int number){
-        ArrayList<Recipes> recipes = new ArrayList<>();
-        Random random = new Random();
 
-        for (int i = 0; i< number ; i++){
-            int num = random.nextInt(4) + 1;
-            Recipes recipe = new Recipes();
-            String name = "No name";
-            switch (num){
-                case 1:
-                    name = "Nutella";
-                    break;
-                case 2:
-                    name = "Brownies";
-                    break;
-                case 3:
-                    name = "Cheese Cake";
-                    break;
-
-                case 4:
-                    name = "Yellow Cake";
-                    break;
-            }
-            recipe.setRecipeName( name);
-            recipes.add(recipe);
-        }
-        return recipes;
+    public int getId() {
+        return id;
     }
 
-    public String getRecipeName() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setRecipeName(String name) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public int getServings() {
+        return servings;
+    }
+
+    public void setServings(int servings) {
+        this.servings = servings;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Ingredients[] getIngredients() {
@@ -71,7 +70,6 @@ public class Recipes implements Parcelable {
     }
 
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -79,7 +77,10 @@ public class Recipes implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
         dest.writeString(this.name);
+        dest.writeInt(this.servings);
+        dest.writeString(this.image);
         dest.writeTypedArray(this.ingredients, flags);
         dest.writeTypedArray(this.steps, flags);
     }
@@ -88,12 +89,15 @@ public class Recipes implements Parcelable {
     }
 
     protected Recipes(Parcel in) {
+        this.id = in.readInt();
         this.name = in.readString();
+        this.servings = in.readInt();
+        this.image = in.readString();
         this.ingredients = in.createTypedArray(Ingredients.CREATOR);
         this.steps = in.createTypedArray(Steps.CREATOR);
     }
 
-    public static final Parcelable.Creator<Recipes> CREATOR = new Parcelable.Creator<Recipes>() {
+    public static final Creator<Recipes> CREATOR = new Creator<Recipes>() {
         @Override
         public Recipes createFromParcel(Parcel source) {
             return new Recipes(source);

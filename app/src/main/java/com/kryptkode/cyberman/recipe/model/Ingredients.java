@@ -13,6 +13,15 @@ public class Ingredients implements Parcelable {
     private double quantity;
     private String measure;
     private String ingredient;
+    private int recipeId;
+
+    public int getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
+    }
 
     public double getQuantity() {
         return quantity;
@@ -39,6 +48,9 @@ public class Ingredients implements Parcelable {
     }
 
 
+    public Ingredients() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -49,15 +61,14 @@ public class Ingredients implements Parcelable {
         dest.writeDouble(this.quantity);
         dest.writeString(this.measure);
         dest.writeString(this.ingredient);
-    }
-
-    public Ingredients() {
+        dest.writeInt(this.recipeId);
     }
 
     protected Ingredients(Parcel in) {
         this.quantity = in.readDouble();
         this.measure = in.readString();
         this.ingredient = in.readString();
+        this.recipeId = in.readInt();
     }
 
     public static final Creator<Ingredients> CREATOR = new Creator<Ingredients>() {

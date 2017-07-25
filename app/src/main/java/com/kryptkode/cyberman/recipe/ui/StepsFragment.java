@@ -26,7 +26,7 @@ public class StepsFragment extends Fragment implements StepsAdapter.StepsAdapter
     private StepFragmentCallbacks stepFragmentCallbacks;
 
     public interface StepFragmentCallbacks{
-        void onPlayVideoButtonClicked(String videoUrl);
+        void onPlayVideoButtonClicked(String videoUrl, String thumbnail);
     }
 
 
@@ -59,6 +59,7 @@ public class StepsFragment extends Fragment implements StepsAdapter.StepsAdapter
     @Override
     public void onPlayVideoButtonClicked(int position) {
         String videoUrl = steps[position].getVideoUrl();
-        stepFragmentCallbacks.onPlayVideoButtonClicked(videoUrl);
+        String thumbnail = steps[position].getThumbnailUrl();
+        stepFragmentCallbacks.onPlayVideoButtonClicked(videoUrl, thumbnail);
     }
 }

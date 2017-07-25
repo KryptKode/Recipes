@@ -1,6 +1,8 @@
 package com.kryptkode.cyberman.recipe.ui;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -23,7 +25,9 @@ import com.kryptkode.cyberman.recipe.model.Steps;
  * A simple {@link Fragment} subclass.
  */
 public class ContentFragment extends Fragment implements StepsFragment.StepFragmentCallbacks{
-    public static final String ARG = "bundle";
+    public static final String LAST_VIEWED = "last_viewed_recipe";
+    public static final String LAST_VIEWED_NAME = "last_viewed_recipe_name";
+
     private Steps[] steps;
     private Ingredients[] ingredients;
     private String recipeName;
@@ -37,8 +41,20 @@ public class ContentFragment extends Fragment implements StepsFragment.StepFragm
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callback = (ContentFragmentCallbacks) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        callback = null;
+    }
+
     public interface ContentFragmentCallbacks{
-        void onPlayVideoButtonClicked(String videoUrl);
+        void onPlayVideoButtonClicked(String videoUrl, String thumbnail);
     }
 
     @Override
@@ -48,6 +64,15 @@ public class ContentFragment extends Fragment implements StepsFragment.StepFragm
         ingredients = (Ingredients[]) bundle.getParcelableArray(Ingredients.KEY);
         steps = (Steps[]) bundle.getParcelableArray(Steps.KEY);
         recipeName = bundle.getString(Recipes.KEY);
+
+        //store the curently viewed recipe ID for use with the widget
+        int recipeId = bundle.getInt(Recipes.ID);
+        SharedPreferences preferences = getContext().getSharedPreferences(
+                getString(R.string.shared_prefs_name), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(LAST_VIEWED, recipeId);
+        editor.putString(LAST_VIEWED_NAME, getString(R.string.for_ingredients, recipeName));
+        editor.apply();
 
         if (bundle.containsKey(RecipeActivity.DETERMINANT)) {
             whichTab = bundle.getInt(RecipeActivity.DETERMINANT);
@@ -120,11 +145,8 @@ public class ContentFragment extends Fragment implements StepsFragment.StepFragm
     }
 
     @Override
-    public void onPlayVideoButtonClicked(String videoUrl) {
-        callback.onPlayVideoButtonClicked(videoUrl);
+    public void onPlayVideoButtonClicked(String videoUrl, String thumbnail) {
+        callback.onPlayVideoButtonClicked(videoUrl, thumbnail);
     }
 
-    public void setCallback(ContentFragmentCallbacks callback) {
-        this.callback = callback;
-    }
 }

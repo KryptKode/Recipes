@@ -13,7 +13,18 @@ public class Steps implements Parcelable {
     private String shortDescription;
     private String description;
     private String videoURL;
-    private String thumbnailUrl;
+    private String thumbnailURL;
+    private int recipeId;
+
+
+    public int getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
+    }
+
 
     public int getId() {
         return id;
@@ -48,13 +59,16 @@ public class Steps implements Parcelable {
     }
 
     public String getThumbnailUrl() {
-        return thumbnailUrl;
+        return thumbnailURL;
     }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
+    public void setThumbnailUrl(String thumbnailURL) {
+        this.thumbnailURL = thumbnailURL;
     }
 
+
+    public Steps() {
+    }
 
     @Override
     public int describeContents() {
@@ -67,10 +81,8 @@ public class Steps implements Parcelable {
         dest.writeString(this.shortDescription);
         dest.writeString(this.description);
         dest.writeString(this.videoURL);
-        dest.writeString(this.thumbnailUrl);
-    }
-
-    public Steps() {
+        dest.writeString(this.thumbnailURL);
+        dest.writeInt(this.recipeId);
     }
 
     protected Steps(Parcel in) {
@@ -78,10 +90,11 @@ public class Steps implements Parcelable {
         this.shortDescription = in.readString();
         this.description = in.readString();
         this.videoURL = in.readString();
-        this.thumbnailUrl = in.readString();
+        this.thumbnailURL = in.readString();
+        this.recipeId = in.readInt();
     }
 
-    public static final Parcelable.Creator<Steps> CREATOR = new Parcelable.Creator<Steps>() {
+    public static final Creator<Steps> CREATOR = new Creator<Steps>() {
         @Override
         public Steps createFromParcel(Parcel source) {
             return new Steps(source);
