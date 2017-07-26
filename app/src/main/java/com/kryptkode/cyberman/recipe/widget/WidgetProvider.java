@@ -50,7 +50,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, 0);
         //TODO Check why the widget does not load when I set the pending intent
-       //views.setOnClickPendingIntent(R.id.widget_list_view, pendingIntent);
+       views.setOnClickPendingIntent(R.id.widget_list_view, pendingIntent);
 
         //set the remote views empty view
         views.setEmptyView(R.id.widget_list_view, R.id.widget_empty_view);
