@@ -102,34 +102,40 @@ import com.squareup.picasso.Target;
             playerView.setPlayer(player);
 
             //if there is a thumbnail, load it as the player's artwork
-            if (!thumbnail.isEmpty()) {
-                Target mTarget = new Target() {
-                    @Override
-                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                        playerView.setDefaultArtwork(bitmap);
-                    }
+            if (thumbnail != null) {
 
-                    @Override
-                    public void onBitmapFailed(Drawable errorDrawable) {
+                if (!thumbnail.isEmpty()) {
+                    Target mTarget = new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            playerView.setDefaultArtwork(bitmap);
+                        }
 
-                    }
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
 
-                    @Override
-                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        }
 
-                    }
-                };
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
 
-                Picasso.with(this).load(thumbnail).into(mTarget);
+                        }
+                    };
+
+                    Picasso.with(this).load(thumbnail).into(mTarget);
+                }
             }
             player.setPlayWhenReady(playWhenReady);
             player.addListener(exoPlayerListenter);
 
             player.seekTo(currentWindow, playbackPosition);
+            if (videoUrl != null) {
 
-            Uri uri = Uri.parse(videoUrl);
-            MediaSource mediaSource = buildMediaSource(uri);
-            player.prepare(mediaSource, true, false);
+                Uri uri = Uri.parse(videoUrl);
+                MediaSource mediaSource = buildMediaSource(uri);
+                player.prepare(mediaSource, true, false);
+
+            }
 
         }
 
@@ -174,12 +180,15 @@ import com.squareup.picasso.Target;
         }
 
         private void releasePlayer() {
-            playWhenReady = player.getPlayWhenReady();
-            currentWindow = player.getCurrentWindowIndex();
-            playbackPosition = player.getCurrentPosition();
-            player.removeListener(exoPlayerListenter);
-            player.release();
-            player = null;
+            if (player != null) {
+
+                playWhenReady = player.getPlayWhenReady();
+                currentWindow = player.getCurrentWindowIndex();
+                playbackPosition = player.getCurrentPosition();
+                player.removeListener(exoPlayerListenter);
+                player.release();
+                player = null;
+            }
 
 
         }

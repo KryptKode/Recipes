@@ -66,7 +66,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
     }
 
 
-    class StepsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+  public  class StepsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView titleTextView;
         TextView descriptionTextView;
         Button playVideoButton;

@@ -28,7 +28,7 @@ import static org.hamcrest.Matchers.anything;
 /**
  * Created by Cyberman on 7/22/2017.
  */
-
+//Only valid after running the RecipeActivityFirstRunTest.java test
 @RunWith(AndroidJUnit4.class)
 public class RecipeRecyclerViewOpensRightContentFragmentTest {
     @Rule

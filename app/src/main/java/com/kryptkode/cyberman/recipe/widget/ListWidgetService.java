@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.net.wifi.p2p.WifiP2pGroup;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -29,11 +30,14 @@ public class ListWidgetService extends RemoteViewsService {
     public class ListWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
         private Context context;
         private Cursor cursor;
-        private int recipeId;
+        private int recipeId = 1;
 
         public ListWidgetRemoteViewsFactory(Context context, Intent intent) {
             this.context = context;
-            this.recipeId = intent.getIntExtra(WidgetProvider.RECIPE_ID, 1);
+            if (intent.hasExtra(WidgetProvider.RECIPE_ID)){
+
+                this.recipeId = intent.getIntExtra(WidgetProvider.RECIPE_ID, 1);
+            }
 
         }
 

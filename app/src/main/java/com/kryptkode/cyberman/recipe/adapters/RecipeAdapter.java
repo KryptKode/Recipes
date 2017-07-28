@@ -110,7 +110,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         this.recipes = recipes;
     }
 
-    class RecipeViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
+    public class RecipeViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
 
         ImageView coverImageView;
         TextView titleTextView;

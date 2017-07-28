@@ -23,8 +23,11 @@ public class WidgetProvider extends AppWidgetProvider {
     public static final String EXTRA_ITEM = "com.kryptkode.cyberman.recipe.widget.EXTRA_ITEM";
     public static final String INGREDIENT_ACTION = "com.kryptkode.cyberman.recipe.widget.action.INGREDIENT_ACTION";
     public static final String RECIPE_ID = "com.kryptkode.cyberman.recipe.widget.RECIPE_ID";
+    public static final String ACTIVITY_ACTION = "com.kryptkode.cyberman.recipe.widget.action.start_activity";
     private static int recipeId;
     private static String recipeName;
+
+
 
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
@@ -47,10 +50,10 @@ public class WidgetProvider extends AppWidgetProvider {
 
        //intent to launch the activity
         Intent intent1 = new Intent(context, RecipeActivity.class);
-
+        intent.setAction(ACTIVITY_ACTION);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, 0);
         //TODO Check why the widget does not load when I set the pending intent
-       views.setOnClickPendingIntent(R.id.widget_list_view, pendingIntent);
+       views.setOnClickPendingIntent(R.id.widget_title, pendingIntent);
 
         //set the remote views empty view
         views.setEmptyView(R.id.widget_list_view, R.id.widget_empty_view);
@@ -68,6 +71,7 @@ public class WidgetProvider extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
+
     }
 
     @Override
